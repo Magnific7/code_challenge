@@ -10,6 +10,9 @@ request.onload = function () {
   var data = JSON.parse(this.response);
   if (request.status >= 200 && request.status < 400) {
     data.forEach((user) => {
+      const gripContainer = document.createElement("div");
+      gripContainer.setAttribute("class", "grid-container");
+
       const card = document.createElement("div");
       card.setAttribute("class", "card");
 
@@ -38,40 +41,35 @@ request.onload = function () {
           var data = JSON.parse(this.response);
 
           if (posts.status >= 200 && posts.status < 400) {
-            
-              const modalFade = document.createElement("div");
-              modalFade.setAttribute("class", "modal fade");
-              modalFade.setAttribute("id", "exampleModalLong");
-              modalFade.setAttribute("tabindex", "-1");
-              modalFade.setAttribute("role", "dialog");
-              modalFade.setAttribute(
-                "aria-labelledby",
-                "exampleModalLongTitle"
-              );
-              modalFade.setAttribute("aria-hidden", "true");
+            const modalFade = document.createElement("div");
+            modalFade.setAttribute("class", "modal fade");
+            modalFade.setAttribute("id", "exampleModalLong");
+            modalFade.setAttribute("tabindex", "-1");
+            modalFade.setAttribute("role", "dialog");
+            modalFade.setAttribute("aria-labelledby", "exampleModalLongTitle");
+            modalFade.setAttribute("aria-hidden", "true");
 
-              container.appendChild(modalFade);
+            container.appendChild(modalFade);
 
-              const modalDialog = document.createElement("div");
+            const modalDialog = document.createElement("div");
 
-              modalDialog.setAttribute("role", "document");
-              modalDialog.setAttribute("class", "modal-dialog");
+            modalDialog.setAttribute("role", "document");
+            modalDialog.setAttribute("class", "modal-dialog");
 
-              const modalContent = document.createElement("div");
-              modalContent.setAttribute("class", "modal-content");
+            const modalContent = document.createElement("div");
+            modalContent.setAttribute("class", "modal-content");
 
-              modalDialog.appendChild(modalContent);
+            modalDialog.appendChild(modalContent);
 
-              const modalHeader = document.createElement("div");
-              modalHeader.setAttribute("class", "modal-header");
+            const modalHeader = document.createElement("div");
+            modalHeader.setAttribute("class", "modal-header");
 
-              modalContent.appendChild(modalHeader);
+            modalContent.appendChild(modalHeader);
 
-              const h4 = document.createElement("h4");
-              h4.textContent = `${user.name} 's posts`;
-              modalHeader.appendChild(h4);
-              data.forEach((post) => {
-
+            const h4 = document.createElement("h4");
+            h4.textContent = `${user.name} 's posts`;
+            modalHeader.appendChild(h4);
+            data.forEach((post) => {
               const modalBody = document.createElement("div");
               modalBody.setAttribute("class", "modal-body");
               modalBody.setAttribute("id", "modal-card");
@@ -82,31 +80,34 @@ request.onload = function () {
               h6.textContent = post.body;
               modalBody.appendChild(h6);
             });
-              const modalFooter = document.createElement("div");
-              modalFooter.setAttribute("class", "modal-footer");
+            const modalFooter = document.createElement("div");
+            modalFooter.setAttribute("class", "modal-footer");
 
-              const btne = document.createElement("button");
-              btne.setAttribute("type", "button");
-              btne.setAttribute("class", "btn btn-secondary");
-              btne.setAttribute("data-dismiss", "modal");
-              btne.innerHTML = "Close";
+            const btne = document.createElement("button");
+            btne.setAttribute("type", "button");
+            btne.setAttribute("class", "btn btn-secondary");
+            btne.setAttribute("data-dismiss", "modal");
+            btne.innerHTML = "Close";
+            // btn.onclick = function () {
+            //     window.location.href = "index.html"
+            // }
 
-              modalFooter.appendChild(btne);
-              modalContent.appendChild(modalFooter);
 
-              modalFade.appendChild(modalDialog);
-        
+            modalFooter.appendChild(btne);
+            modalContent.appendChild(modalFooter);
+
+            modalFade.appendChild(modalDialog);
           } else {
-            const errorMessage = document.createElement("marquee");
-            errorMessage.textContent = `Gah, it's not working!`;
-            postPage.appendChild(errorMessage);
+            const errorMessage = document.createElement("error");
+            errorMessage.textContent = `Something went wrong please reload the page again`;
+            modalFade.appendChild(errorMessage);
           }
         };
 
         posts.send();
       };
-
-      container.appendChild(card);
+      container.appendChild(gripContainer);
+      gripContainer.appendChild(card);
       card.appendChild(h1);
       card.appendChild(p);
       card.appendChild(btn);
