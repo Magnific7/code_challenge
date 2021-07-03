@@ -88,9 +88,9 @@ request.onload = function () {
             btne.setAttribute("class", "btn btn-secondary");
             btne.setAttribute("data-dismiss", "modal");
             btne.innerHTML = "Close";
-            // btn.onclick = function () {
-            //     window.location.href = "index.html"
-            // }
+            btne.onclick = function () {
+                location.href = "index.html"
+            }
 
 
             modalFooter.appendChild(btne);
@@ -100,7 +100,7 @@ request.onload = function () {
           } else {
             const errorMessage = document.createElement("error");
             errorMessage.textContent = `Something went wrong please reload the page again`;
-            modalFade.appendChild(errorMessage);
+            container.appendChild(errorMessage);
           }
         };
 
